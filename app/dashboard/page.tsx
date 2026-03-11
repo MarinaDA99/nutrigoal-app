@@ -357,7 +357,7 @@ export default function DashboardPage() {
     });
 
   // Suscripción a cambios
-  const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: any, session) => {
+  const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: any, session: any) => {
     if (!active) return;
     setUser(session?.user ?? null);
   });
