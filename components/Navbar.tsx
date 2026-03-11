@@ -29,7 +29,7 @@ export function Navbar() {
   return (
     <>
       {/* --- TOP BAR (Logo e Idiomas) --- */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between border-b border-[var(--border)] bg-white/80 px-4 py-3 backdrop-blur-md">
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between border-b border-slate-100 bg-white/80 px-4 py-3 backdrop-blur-md">
         <div className="flex items-center gap-2">
           <div className="relative h-7 w-7">
             <Image
@@ -60,7 +60,7 @@ export function Navbar() {
       </nav>
 
       {/* --- BOTTOM NAV (Navegación estilo App de las capturas) --- */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-[var(--border)] bg-white/95 px-6 py-3 backdrop-blur-lg sm:hidden">
+      <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-slate-100 bg-white/90 px-6 py-3 backdrop-blur-lg sm:hidden">
         <div className="flex justify-between items-center max-w-md mx-auto">
           {navItems.map((item) => {
             const isActive = pathname === item.path;
@@ -69,19 +69,11 @@ export function Navbar() {
                 key={item.path}
                 href={item.path}
                 className={`flex flex-col items-center gap-1 transition-all ${
-                  isActive
-                    ? "text-[#6ab04c] scale-110"
-                    : "text-slate-400 opacity-70"
+                  isActive ? "text-[#6ab04c] scale-110" : "text-slate-400 opacity-60"
                 }`}
               >
-                <span
-                  className={`flex h-9 w-9 items-center justify-center rounded-full text-lg ${
-                    isActive ? "bg-[#e8f4d1]" : ""
-                  }`}
-                >
-                  {item.icon}
-                </span>
-                <span className="text-[9px] font-extrabold uppercase tracking-[0.2em]">
+                <span className="text-xl">{item.icon}</span>
+                <span className="text-[9px] font-bold uppercase tracking-tighter">
                   {item.label}
                 </span>
               </Link>

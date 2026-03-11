@@ -22,23 +22,24 @@ function DonutProgress({ count, messages }: { count: number; messages: any }) {
     { name: "remaining", value: Math.max(WEEKLY_GOAL - count, 0) },
   ];
 
-  // Colores de la captura: Verde vibrante (#6ab04c) y fondo crema suave (#f0f2da)
+  // Colores de la captura: Verde vibrante y un gris/crema suave de fondo
   const COLORS = ["#6ab04c", "#f0f2da"];
 
   return (
-    <div className="relative h-64 w-64 mx-auto">
+    <div className="relative h-56 w-56 mx-auto">
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie
             data={data}
-            innerRadius="85%"
+            innerRadius="82%"
             outerRadius="100%"
             startAngle={90}
             endAngle={450}
             paddingAngle={0}
             dataKey="value"
             stroke="none"
-            cornerRadius={10} // Redondeado correcto aquí
+            // Movimos el redondeado aquí, que es donde Recharts lo acepta
+            cornerRadius={10}
           >
             {data.map((entry, index) => (
               <Cell 
@@ -50,10 +51,10 @@ function DonutProgress({ count, messages }: { count: number; messages: any }) {
         </PieChart>
       </ResponsiveContainer>
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-        <span className="text-6xl font-black text-slate-800 tracking-tighter">
+        <span className="text-5xl font-bold text-slate-800">
           {count}/{WEEKLY_GOAL}
         </span>
-        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em] mt-2">
+        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">
           {messages.weeklyDiversityTitle || "Variedad"}
         </span>
       </div>
@@ -75,29 +76,29 @@ function SmartSearch({ value, onChange, onSelect, placeholder, locale }: any) {
   }, [value]);
 
   return (
-    <div className="relative mb-10">
-      <div className="flex items-center rounded-[2rem] bg-white px-6 py-5 shadow-sm border border-slate-100 transition-all focus-within:shadow-md">
-        <span className="mr-3 text-xl opacity-40">🔍</span>
+    <div className="relative mb-8">
+      <div className="flex items-center rounded-2xl bg-white px-5 py-4 shadow-sm border border-slate-100 transition-focus focus-within:border-primary/50">
+        <span className="mr-3 text-lg opacity-50">🔍</span>
         <input
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setTimeout(() => setIsFocused(false), 150)}
           placeholder={placeholder}
-          className="w-full bg-transparent text-base outline-none placeholder:text-slate-300 font-medium"
+          className="w-full bg-transparent text-sm outline-none placeholder:text-slate-400 font-medium"
         />
       </div>
       {isFocused && suggestions.length > 0 && (
-        <div className="absolute z-20 mt-2 w-full overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-2xl">
+        <div className="absolute z-20 mt-2 w-full overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-xl">
           {suggestions.map((food) => (
             <button
               key={food.id}
-              className="flex w-full items-center gap-4 px-6 py-5 text-left text-sm hover:bg-slate-50 border-b border-slate-50 last:border-none"
+              className="flex w-full items-center gap-3 px-5 py-4 text-left text-sm hover:bg-slate-50 border-b border-slate-50 last:border-none transition-colors"
               onMouseDown={(e) => e.preventDefault()}
               onClick={() => onSelect(food)}
             >
-              <span className="text-2xl">{food.emoji}</span>
-              <span className="font-bold text-slate-700 text-base">{getFoodLabel(food, locale)}</span>
+              <span className="text-xl">{food.emoji}</span>
+              <span className="font-semibold text-slate-700">{getFoodLabel(food, locale)}</span>
             </button>
           ))}
         </div>
@@ -112,6 +113,7 @@ export default function DashboardPage() {
   const [user, setUser] = useState<User | null>(null);
   const [search, setSearch] = useState("");
 
+  // Cargar datos locales evitando errores de hidratación
   useEffect(() => {
     const stored = window.localStorage.getItem("nutrigoal-week");
     if (stored) {
@@ -122,6 +124,7 @@ export default function DashboardPage() {
     }
   }, []);
 
+  // Auth Supabase con tipos corregidos para evitar errores de compilación
   useEffect(() => {
     if (!supabase) return;
     supabase.auth.getUser().then(({ data }: any) => setUser(data.user ?? null));
@@ -149,45 +152,45 @@ export default function DashboardPage() {
 
   return (
     <AppShell>
-      <div className="px-8 py-10 max-w-md mx-auto min-h-screen pb-32 bg-[#fdfcf3]">
-        <header className="flex justify-between items-start mb-12">
+      <div className="px-6 py-8 max-w-md mx-auto min-h-screen pb-24">
+        <header className="flex justify-between items-start mb-10">
           <div>
-            <h1 className="text-4xl font-black text-slate-800 tracking-tighter">NutriBioMind</h1>
-            <p className="text-[11px] font-bold text-slate-400 uppercase tracking-[0.25em] mt-2">
-              Tu diversidad semanal
+            <h1 className="text-3xl font-black text-slate-800 tracking-tight">NutriBioMind</h1>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1">
+              {messages.weeklyDiversityTitle}
             </p>
           </div>
-          <div className="h-14 w-14 rounded-[1.25rem] bg-white shadow-sm border border-slate-100 flex items-center justify-center text-2xl">👤</div>
+          <div className="h-12 w-12 rounded-2xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-xl">👤</div>
         </header>
 
-        {/* Gráfico de Progreso */}
-        <section className="mb-14">
+        {/* Anillo de Progreso */}
+        <section className="mb-12">
           <DonutProgress count={plantIds.length} messages={messages} />
         </section>
 
-        {/* Buscador */}
+        {/* Buscador Estilo Captura */}
         <SmartSearch
           value={search}
           onChange={setSearch}
           onSelect={handleRegister}
-          placeholder={messages.searchPlaceholder || "Añadir planta..."}
+          placeholder={messages.searchPlaceholder || "Añadir una nueva planta..."}
           locale={locale}
         />
 
-        {/* Sugerencias estilo Tags */}
-        <section className="mb-14">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-[11px] font-black text-slate-800 uppercase tracking-[0.2em]">
-              Sugerencias
+        {/* Sugerencias Estilo Tags (como en Screenshot_20250703_131653) */}
+        <section>
+          <div className="flex justify-between items-center mb-5">
+            <h2 className="text-xs font-black text-slate-800 uppercase tracking-widest">
+              {messages.randomSuggestionsTitle || "Sugerencias"}
             </h2>
-            <button className="text-[10px] font-bold text-[#6ab04c] tracking-widest uppercase">VER TODAS</button>
+            <button className="text-[10px] font-bold text-primary tracking-widest uppercase">VER TODAS</button>
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2">
             {FOODS.filter(f => !plantIds.includes(f.id)).slice(0, 6).map(food => (
               <button
                 key={food.id}
                 onClick={() => handleRegister(food)}
-                className="flex items-center gap-2 rounded-full bg-white border border-slate-100 px-5 py-3 text-sm font-bold text-slate-700 shadow-sm active:scale-95 transition-all"
+                className="flex items-center gap-2 rounded-full bg-white border border-slate-100 px-4 py-2.5 text-sm font-bold text-slate-700 shadow-sm active:scale-95 transition-all hover:border-primary/30"
               >
                 <span>{food.emoji}</span>
                 {getFoodLabel(food, locale)}
@@ -196,24 +199,19 @@ export default function DashboardPage() {
           </div>
         </section>
 
-        {/* Tarjetas de Salud */}
-        <section className="grid grid-cols-2 gap-5">
-           <div className="bg-[#e8f4d1] p-8 rounded-[2.5rem] flex flex-col items-center text-center shadow-sm">
-              <span className="text-4xl mb-4">🧠</span>
-              <span className="text-[11px] font-black text-green-900 uppercase tracking-widest">Salud Mental</span>
-              <span className="text-xs font-bold text-green-800/50 mt-1">Optimizada</span>
+        {/* Tarjetas de Beneficios (como en la captura del cerebro/inmunidad) */}
+        <section className="mt-12 grid grid-cols-2 gap-4">
+           <div className="bg-[#e8f4d1] p-6 rounded-[2rem] flex flex-col items-center text-center shadow-sm">
+              <span className="text-3xl mb-3">🧠</span>
+              <span className="text-[10px] font-black text-green-900 uppercase tracking-wider">Salud Mental</span>
+              <span className="text-xs font-medium text-green-800/60 mt-1">Mejorada</span>
            </div>
-           <div className="bg-[#f0f2da] p-8 rounded-[2.5rem] flex flex-col items-center text-center shadow-sm">
-              <span className="text-4xl mb-4">🛡️</span>
-              <span className="text-[11px] font-black text-slate-700 uppercase tracking-widest">Inmunidad</span>
-              <span className="text-xs font-bold text-slate-600/50 mt-1">Reforzada</span>
+           <div className="bg-[#f0f2da] p-6 rounded-[2rem] flex flex-col items-center text-center shadow-sm">
+              <span className="text-3xl mb-3">🛡️</span>
+              <span className="text-[10px] font-black text-slate-700 uppercase tracking-wider">Inmunidad</span>
+              <span className="text-xs font-medium text-slate-600/60 mt-1">Protegida</span>
            </div>
         </section>
-        
-        {/* Botón flotante opcional (si quieres que sea igual al del screenshot) */}
-        <button className="fixed bottom-24 right-8 h-16 w-16 bg-[#6ab04c] rounded-full shadow-xl text-white text-3xl flex items-center justify-center font-bold active:scale-90 transition-transform z-40">
-          +
-        </button>
       </div>
     </AppShell>
   );
