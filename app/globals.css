@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --background: #fdfcf3;        /* Very pale cream background */
+  --background: #fbfbf4;        /* Page background */
   --foreground: #1a2e1a;        /* Dark green for text */
   --card: #ffffff;
   --card-foreground: #1a2e1a;

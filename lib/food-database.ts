@@ -91,6 +91,97 @@ export const FOODS: FoodItem[] = [
     },
   },
   {
+    id: "raiz-achicoria",
+    name: "Raíz de achicoria",
+    category: "vegetable",
+    emoji: CATEGORY_EMOJI.vegetable,
+    color: "#b7791f",
+    pniBenefits:
+      "Riquísima en inulina, un prebiótico que alimenta selectivamente a bacterias beneficiosas.",
+    tags: ["prebiotic", "fiber"],
+    translations: {
+      en: "Chicory root",
+    },
+  },
+  {
+    id: "alcachofa-jerusalen",
+    name: "Alcachofa de Jerusalén",
+    category: "vegetable",
+    emoji: CATEGORY_EMOJI.vegetable,
+    color: "#9f7aea",
+    pniBenefits:
+      "Tuber prebiótico muy rico en inulina que incrementa la producción de ácidos grasos de cadena corta.",
+    tags: ["prebiotic", "fiber"],
+    translations: {
+      en: "Jerusalem artichoke",
+    },
+  },
+  {
+    id: "cebada",
+    name: "Cebada",
+    category: "grain",
+    emoji: CATEGORY_EMOJI.grain,
+    color: "#d69e2e",
+    pniBenefits:
+      "Cereal con betaglucanos y fibra que actúa como prebiótico y ayuda al control glucémico.",
+    tags: ["fiber", "prebiotic"],
+    translations: {
+      en: "Barley",
+    },
+  },
+  {
+    id: "algas-marinas",
+    name: "Algas marinas",
+    category: "vegetable",
+    emoji: "🌊",
+    color: "#2c7a7b",
+    pniBenefits:
+      "Ricas en fibras solubles y minerales que apoyan la microbiota y el metabolismo tiroideo.",
+    tags: ["fiber", "prebiotic"],
+    translations: {
+      en: "Seaweed",
+    },
+  },
+  {
+    id: "diente-de-leon",
+    name: "Hojas de diente de león",
+    category: "vegetable",
+    emoji: CATEGORY_EMOJI.vegetable,
+    color: "#68d391",
+    pniBenefits:
+      "Hojas amargas ricas en fibra y compuestos detox que favorecen hígado y microbiota.",
+    tags: ["fiber", "prebiotic", "detox"],
+    translations: {
+      en: "Dandelion greens",
+    },
+  },
+  {
+    id: "legumbres-mixtas",
+    name: "Legumbres mixtas",
+    category: "legume",
+    emoji: CATEGORY_EMOJI.legume,
+    color: "#c05621",
+    pniBenefits:
+      "Mezcla de lentejas, garbanzos y alubias: gran aporte de fibra fermentable y proteína vegetal.",
+    tags: ["fiber", "prebiotic"],
+    translations: {
+      en: "Mixed legumes",
+    },
+  },
+  {
+    id: "guisantes-verdes",
+    name: "Guisantes verdes",
+    category: "legume",
+    emoji: CATEGORY_EMOJI.legume,
+    color: "#48bb78",
+    pniBenefits:
+      "Aportan fibra y almidón resistente que nutre la microbiota y ayuda al control glucémico.",
+    tags: ["fiber", "prebiotic"],
+    translations: {
+      en: "Green peas",
+    },
+  },
+  {
     id: "col-rizada",
     name: "Col rizada (kale)",
     category: "vegetable",
@@ -105,6 +196,136 @@ export const FOODS: FoodItem[] = [
       it: "Cavolo riccio (kale)",
       de: "Grünkohl (Kale)",
       pt: "Couve kale",
+    },
+  },
+  {
+    id: "yogur-fermentado",
+    name: "Yogur con cultivos vivos",
+    category: "grain",
+    emoji: "🥛",
+    color: "#edf2f7",
+    pniBenefits:
+      "Fuente clásica de probióticos lácteos que refuerzan la barrera intestinal.",
+    tags: ["fermented"],
+    translations: {
+      en: "Yogurt with live cultures",
+    },
+  },
+  {
+    id: "kefir",
+    name: "Kéfir",
+    category: "grain",
+    emoji: "🥛",
+    color: "#e2e8f0",
+    pniBenefits:
+      "Bebida fermentada rica en probióticos diversos que modulan el eje intestino‑cerebro.",
+    tags: ["fermented"],
+    translations: {
+      en: "Kefir",
+    },
+  },
+  {
+    id: "miso",
+    name: "Miso",
+    category: "legume",
+    emoji: "🥣",
+    color: "#b7791f",
+    pniBenefits:
+      "Pasta de soja fermentada fuente de probióticos y compuestos umami beneficiosos.",
+    tags: ["fermented"],
+    translations: {
+      en: "Miso",
+    },
+  },
+  {
+    id: "tempeh",
+    name: "Tempeh",
+    category: "legume",
+    emoji: "🧊",
+    color: "#ecc94b",
+    pniBenefits:
+      "Soja fermentada con alto contenido en proteína y probióticos que favorecen la microbiota.",
+    tags: ["fermented"],
+    translations: {
+      en: "Tempeh",
+    },
+  },
+  {
+    id: "kombucha",
+    name: "Kombucha",
+    category: "grain",
+    emoji: "🥤",
+    color: "#f6ad55",
+    pniBenefits:
+      "Té fermentado con cultivos vivos que aporta ácidos orgánicos y probióticos.",
+    tags: ["fermented"],
+    translations: {
+      en: "Kombucha",
+    },
+  },
+  {
+    id: "natto",
+    name: "Natto",
+    category: "legume",
+    emoji: "🥢",
+    color: "#c05621",
+    pniBenefits:
+      "Plato japonés de soja fermentada rico en vitamina K2 y probióticos.",
+    tags: ["fermented"],
+    translations: {
+      en: "Natto",
+    },
+  },
+  {
+    id: "pepinos-fermentados",
+    name: "Pepinillos fermentados",
+    category: "vegetable",
+    emoji: "🥒",
+    color: "#68d391",
+    pniBenefits:
+      "Pepinos fermentados de forma natural que aportan probióticos y ácidos orgánicos.",
+    tags: ["fermented"],
+    translations: {
+      en: "Fermented pickles",
+    },
+  },
+  {
+    id: "queso-fermentado",
+    name: "Queso fermentado",
+    category: "grain",
+    emoji: "🧀",
+    color: "#f6e05e",
+    pniBenefits:
+      "Algunos quesos curados contienen bacterias vivas que pueden actuar como probióticos.",
+    tags: ["fermented"],
+    translations: {
+      en: "Fermented cheese",
+    },
+  },
+  {
+    id: "vinagre-madre",
+    name: "Vinagre de manzana (con madre)",
+    category: "fruit",
+    emoji: "🍎",
+    color: "#dd6b20",
+    pniBenefits:
+      "Contiene una colonia simbiótica de bacterias y levaduras que puede apoyar la digestión.",
+    tags: ["fermented"],
+    translations: {
+      en: "Apple cider vinegar (with the mother)",
+    },
+  },
+  {
+    id: "aceitunas-fermentadas",
+    name: "Aceitunas fermentadas",
+    category: "fruit",
+    emoji: "🫒",
+    color: "#68d391",
+    pniBenefits:
+      "Ricas en grasas monoinsaturadas y microorganismos procedentes de la fermentación.",
+    tags: ["fermented"],
+    translations: {
+      en: "Fermented olives",
     },
   },
   {
