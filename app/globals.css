@@ -3,21 +3,24 @@
 @tailwind utilities;
 
 :root {
-  --background: #fdfcf3;    /* Fondo crema claro */
-  --foreground: #1a2e1a;    /* Verde oscuro para texto */
-  --primary: #6ab04c;       /* Verde vibrante para progreso y botones */
-  --card: #ffffff;          /* Tarjetas blancas */
+  --background: #fdfcf3;        /* Very pale cream background */
+  --foreground: #1a2e1a;        /* Dark green for text */
+  --card: #ffffff;
   --card-foreground: #1a2e1a;
-  --muted-foreground: #718096; /* Gris para textos secundarios */
-  --radius: 1.5rem;         /* Bordes muy redondeados */
+  --primary: #6ab04c;           /* Vibrant leaf green for progress/checks */
+  --primary-foreground: #ffffff;
+  --accent: #e8f4d1;            /* Light lime-green for tags */
+  --border: #e2e8f0;
+  --muted-foreground: #718096;
+  --radius: 1.5rem;
 }
 
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .card-shadow {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
 }

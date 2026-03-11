@@ -51,10 +51,10 @@ function DonutProgress({ count, messages }: { count: number; messages: any }) {
         </PieChart>
       </ResponsiveContainer>
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-        <span className="text-5xl font-bold text-slate-800">
+        <span className="text-5xl font-extrabold text-[#1a2e1a] tracking-tight">
           {count}/{WEEKLY_GOAL}
         </span>
-        <span className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">
+        <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-[0.35em] mt-1">
           {messages.weeklyDiversityTitle || "Variedad"}
         </span>
       </div>
@@ -77,8 +77,8 @@ function SmartSearch({ value, onChange, onSelect, placeholder, locale }: any) {
 
   return (
     <div className="relative mb-8">
-      <div className="flex items-center rounded-2xl bg-white px-5 py-4 shadow-sm border border-slate-100 transition-focus focus-within:border-primary/50">
-        <span className="mr-3 text-lg opacity-50">🔍</span>
+      <div className="flex items-center rounded-full bg-white px-5 py-4 shadow-sm border border-[var(--border)] focus-within:border-primary/60 transition-all">
+        <span className="mr-3 text-lg opacity-60">🔍</span>
         <input
           value={value}
           onChange={(e) => onChange(e.target.value)}
@@ -152,23 +152,25 @@ export default function DashboardPage() {
 
   return (
     <AppShell>
-      <div className="px-6 py-8 max-w-md mx-auto min-h-screen pb-24">
+      <div className="relative px-6 pt-8 pb-32 max-w-md mx-auto min-h-screen">
         <header className="flex justify-between items-start mb-10">
           <div>
-            <h1 className="text-3xl font-black text-slate-800 tracking-tight">NutriBioMind</h1>
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1">
-              {messages.weeklyDiversityTitle}
+            <h1 className="text-3xl font-extrabold text-[#1a2e1a] tracking-tight">
+              NutriGoal
+            </h1>
+            <p className="text-[11px] font-semibold text-slate-500 mt-1">
+              {messages.weeklyDiversityTitle || "Tu diversidad semanal"}
             </p>
           </div>
-          <div className="h-12 w-12 rounded-2xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-xl">👤</div>
+          <div className="h-11 w-11 rounded-full bg-white card-shadow border border-[var(--border)] flex items-center justify-center text-lg">
+            👤
+          </div>
         </header>
 
-        {/* Anillo de Progreso */}
-        <section className="mb-12">
+        <section className="mb-10 flex flex-col items-center">
           <DonutProgress count={plantIds.length} messages={messages} />
         </section>
 
-        {/* Buscador Estilo Captura */}
         <SmartSearch
           value={search}
           onChange={setSearch}
@@ -177,41 +179,83 @@ export default function DashboardPage() {
           locale={locale}
         />
 
-        {/* Sugerencias Estilo Tags (como en Screenshot_20250703_131653) */}
-        <section>
-          <div className="flex justify-between items-center mb-5">
-            <h2 className="text-xs font-black text-slate-800 uppercase tracking-widest">
-              {messages.randomSuggestionsTitle || "Sugerencias"}
+        <section className="mb-8">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xs font-black text-slate-800 uppercase tracking-[0.3em]">
+              {messages.randomSuggestionsTitle || "Sugerencias para hoy"}
             </h2>
-            <button className="text-[10px] font-bold text-primary tracking-widest uppercase">VER TODAS</button>
+            <button className="text-[10px] font-bold text-[#6ab04c] tracking-[0.25em] uppercase">
+              VER TODAS
+            </button>
           </div>
           <div className="flex flex-wrap gap-2">
-            {FOODS.filter(f => !plantIds.includes(f.id)).slice(0, 6).map(food => (
-              <button
-                key={food.id}
-                onClick={() => handleRegister(food)}
-                className="flex items-center gap-2 rounded-full bg-white border border-slate-100 px-4 py-2.5 text-sm font-bold text-slate-700 shadow-sm active:scale-95 transition-all hover:border-primary/30"
-              >
-                <span>{food.emoji}</span>
-                {getFoodLabel(food, locale)}
-              </button>
-            ))}
+            {FOODS.filter((f) => !plantIds.includes(f.id))
+              .slice(0, 6)
+              .map((food) => (
+                <button
+                  key={food.id}
+                  onClick={() => handleRegister(food)}
+                  className="flex items-center gap-2 rounded-full bg-[var(--accent)] px-4 py-2 text-xs font-semibold text-[#1a2e1a] shadow-sm active:scale-95 transition-all"
+                >
+                  <span>{food.emoji}</span>
+                  {getFoodLabel(food, locale)}
+                </button>
+              ))}
           </div>
         </section>
 
-        {/* Tarjetas de Beneficios (como en la captura del cerebro/inmunidad) */}
-        <section className="mt-12 grid grid-cols-2 gap-4">
-           <div className="bg-[#e8f4d1] p-6 rounded-[2rem] flex flex-col items-center text-center shadow-sm">
+        <section className="space-y-4">
+          <div className="bg-white rounded-[1.75rem] p-5 card-shadow border border-[var(--border)]">
+            <p className="text-[11px] font-extrabold text-[#1a2e1a] uppercase tracking-[0.25em] mb-2">
+              Aquí Tienes Tu Dosis Exprés de Sabiduría Nutricional ⚡
+            </p>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              Cada planta nueva suma puntos para tu microbiota. Cuanta más
+              variedad semanal, más resiliente se vuelve tu salud digestiva y
+              mental.
+            </p>
+            <div className="mt-4 flex items-center justify-between text-[10px] text-slate-400">
+              <span className="font-semibold uppercase tracking-[0.25em]">
+                Dosis Exprés
+              </span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-[var(--accent)] p-5 rounded-[1.75rem] flex flex-col items-center text-center card-shadow">
               <span className="text-3xl mb-3">🧠</span>
-              <span className="text-[10px] font-black text-green-900 uppercase tracking-wider">Salud Mental</span>
-              <span className="text-xs font-medium text-green-800/60 mt-1">Mejorada</span>
-           </div>
-           <div className="bg-[#f0f2da] p-6 rounded-[2rem] flex flex-col items-center text-center shadow-sm">
+              <span className="text-[10px] font-black text-green-900 uppercase tracking-wider">
+                Salud Mental
+              </span>
+              <span className="text-xs font-medium text-green-800/70 mt-1">
+                Más claridad y enfoque
+              </span>
+            </div>
+            <div className="bg-[#f0f2da] p-5 rounded-[1.75rem] flex flex-col items-center text-center card-shadow">
               <span className="text-3xl mb-3">🛡️</span>
-              <span className="text-[10px] font-black text-slate-700 uppercase tracking-wider">Inmunidad</span>
-              <span className="text-xs font-medium text-slate-600/60 mt-1">Protegida</span>
-           </div>
+              <span className="text-[10px] font-black text-slate-800 uppercase tracking-wider">
+                Inmunidad
+              </span>
+              <span className="text-xs font-medium text-slate-700/70 mt-1">
+                Mejor defensa diaria
+              </span>
+            </div>
+          </div>
         </section>
+
+        <button
+          type="button"
+          className="fixed bottom-24 right-6 h-14 w-14 rounded-full bg-[#6ab04c] text-white text-3xl font-bold shadow-xl flex items-center justify-center active:scale-95 transition-transform"
+          aria-label="Añadir nuevo alimento"
+          onClick={() => {
+            const el = document.querySelector<HTMLInputElement>(
+              "input[placeholder]"
+            );
+            el?.focus();
+          }}
+        >
+          +
+        </button>
       </div>
     </AppShell>
   );
