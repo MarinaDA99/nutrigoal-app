@@ -347,10 +347,10 @@ export default function DashboardPage() {
   // Obtener sesión inicial
   supabase.auth
     .getUser()
-    .then(({ data: authData }) => { // Bien hecho renombrando a authData
-      if (!active) return;
-      setUser(authData.user ?? null);
-    })
+    .then(({ data: authData }: { data: any }) => { // Añadimos el tipo ": { data: any }"
+  if (!active) return;
+  setUser(authData.user ?? null);
+})
     .catch(() => {
       if (!active) return;
       setUser(null);
