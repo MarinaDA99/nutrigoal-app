@@ -1,22 +1,23 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #fdf7f1; /* cream */
-  --foreground: #1f2933;
-  --accent-forest: #166534;
-  --accent-forest-soft: #bbf7d0;
-  --accent-orange: #f97316;
-  --accent-orange-soft: #fed7aa;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --background: #fdfcf3;    /* Fondo crema claro */
+  --foreground: #1a2e1a;    /* Verde oscuro para texto */
+  --primary: #6ab04c;       /* Verde vibrante para progreso y botones */
+  --card: #ffffff;          /* Tarjetas blancas */
+  --card-foreground: #1a2e1a;
+  --muted-foreground: #718096; /* Gris para textos secundarios */
+  --radius: 1.5rem;         /* Bordes muy redondeados */
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
+  font-family: 'Inter', sans-serif;
+}
+
+.card-shadow {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
